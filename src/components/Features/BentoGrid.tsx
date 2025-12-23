@@ -1,0 +1,214 @@
+'use client';
+
+import React from 'react';
+import { Row, Col, Typography } from 'antd';
+import {
+    ThunderboltOutlined,
+    FilterOutlined,
+    SafetyCertificateOutlined
+} from '@ant-design/icons';
+
+const { Title, Paragraph } = Typography;
+
+interface FeatureCardProps {
+    icon: React.ReactNode;
+    category: string;
+    title: string;
+    description: string;
+    delay: number;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({
+    icon,
+    category,
+    title,
+    description,
+    delay
+}) => (
+    <div
+        className="glass-card animate-fade-in-up"
+        style={{
+            padding: '32px',
+            height: '100%',
+            opacity: 0,
+            animationDelay: `${delay}s`,
+            animationFillMode: 'forwards',
+        }}
+    >
+        {/* Icon */}
+        <div
+            style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '12px',
+                background: 'linear-gradient(135deg, rgba(0, 102, 255, 0.2) 0%, rgba(0, 212, 255, 0.1) 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '20px',
+                fontSize: '24px',
+                color: '#00d4ff',
+            }}
+        >
+            {icon}
+        </div>
+
+        {/* Category Badge */}
+        <span
+            style={{
+                display: 'inline-block',
+                padding: '4px 12px',
+                background: 'rgba(0, 255, 136, 0.1)',
+                border: '1px solid rgba(0, 255, 136, 0.3)',
+                borderRadius: '100px',
+                fontSize: '12px',
+                fontWeight: 600,
+                color: '#00ff88',
+                marginBottom: '16px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+            }}
+        >
+            {category}
+        </span>
+
+        {/* Title */}
+        <Title
+            level={4}
+            style={{
+                fontSize: '20px',
+                fontWeight: 700,
+                color: '#ffffff',
+                marginBottom: '12px',
+                marginTop: 0,
+            }}
+        >
+            {title}
+        </Title>
+
+        {/* Description */}
+        <Paragraph
+            style={{
+                fontSize: '15px',
+                lineHeight: 1.7,
+                color: 'rgba(255, 255, 255, 0.7)',
+                margin: 0,
+            }}
+        >
+            {description}
+        </Paragraph>
+    </div>
+);
+
+const BentoGrid: React.FC = () => {
+    const features = [
+        {
+            icon: <ThunderboltOutlined />,
+            category: 'Validação',
+            title: 'Validação Física da Manutenção',
+            description: 'O técnico disse que fez, mas a máquina concorda? Cruzamos o input humano com a telemetria para garantir que a manutenção foi eficaz, não apenas burocrática.',
+        },
+        {
+            icon: <FilterOutlined />,
+            category: 'Auditoria',
+            title: 'Auditoria Cruzada (Cognitive Data)',
+            description: 'Os nossos agentes leem os seus contratos e comparam com os lançamentos no SAP em tempo real. Encontramos inconsistências financeiras que humanos deixariam passar.',
+        },
+        {
+            icon: <SafetyCertificateOutlined />,
+            category: 'Legal',
+            title: 'Compliance Nativo',
+            description: 'Cruzamento automático de falhas técnicas com SLAs contratuais e garantias de fornecedores.',
+        },
+    ];
+
+    return (
+        <section
+            style={{
+                padding: '120px 24px',
+                background: '#0a0a0f',
+                position: 'relative',
+            }}
+        >
+            {/* Section Header */}
+            <div
+                style={{
+                    textAlign: 'center',
+                    maxWidth: '700px',
+                    margin: '0 auto 64px',
+                }}
+            >
+                <span
+                    className="animate-fade-in-up"
+                    style={{
+                        display: 'inline-block',
+                        padding: '6px 16px',
+                        background: 'rgba(0, 102, 255, 0.1)',
+                        border: '1px solid rgba(0, 102, 255, 0.2)',
+                        borderRadius: '100px',
+                        fontSize: '13px',
+                        fontWeight: 600,
+                        color: '#0066ff',
+                        marginBottom: '20px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        opacity: 0,
+                        animationDelay: '0.1s',
+                        animationFillMode: 'forwards',
+                    }}
+                >
+                    Diferenciais Técnicos
+                </span>
+
+                <Title
+                    level={2}
+                    className="animate-fade-in-up"
+                    style={{
+                        fontSize: 'clamp(28px, 4vw, 40px)',
+                        fontWeight: 700,
+                        color: '#ffffff',
+                        marginBottom: '16px',
+                        marginTop: 0,
+                        opacity: 0,
+                        animationDelay: '0.2s',
+                        animationFillMode: 'forwards',
+                    }}
+                >
+                    Tecnologia de Ponta para{' '}
+                    <span style={{ color: '#00d4ff' }}>Decisões Autônomas</span>
+                </Title>
+
+                <Paragraph
+                    className="animate-fade-in-up"
+                    style={{
+                        fontSize: '17px',
+                        lineHeight: 1.7,
+                        color: 'rgba(255, 255, 255, 0.65)',
+                        opacity: 0,
+                        animationDelay: '0.3s',
+                        animationFillMode: 'forwards',
+                    }}
+                >
+                    Nossa stack combina física avançada, processamento de sinais e compliance automatizado.
+                </Paragraph>
+            </div>
+
+            {/* Bento Grid */}
+            <Row
+                gutter={[24, 24]}
+                style={{
+                    maxWidth: '1200px',
+                    margin: '0 auto',
+                }}
+            >
+                {features.map((feature, index) => (
+                    <Col key={index} xs={24} md={8}>
+                        <FeatureCard {...feature} delay={0.3 + index * 0.1} />
+                    </Col>
+                ))}
+            </Row>
+        </section>
+    );
+};
+
+export default BentoGrid;
