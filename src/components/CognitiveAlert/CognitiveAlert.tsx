@@ -12,113 +12,115 @@ import {
     BellOutlined
 } from '@ant-design/icons';
 import CognitiveDashboard from '@/components/CognitiveDashboard/CognitiveDashboard';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const { Text } = Typography;
 
 interface CognitiveNotification {
     id: number;
-    title: string;
-    message: string;
+    titleKey: string;
+    messageKey: string;
     type: 'insight' | 'alert' | 'prediction';
-    action?: string;
+    actionKey?: string;
 }
 
-const notifications: CognitiveNotification[] = [
+const notificationKeys: CognitiveNotification[] = [
     // === ESTOQUE E PEÇAS ===
     {
         id: 1,
         type: 'alert',
-        title: 'ALERTA DE ESTOQUE',
-        message: '⚠️ Rolamento SKF 6205-2RS com estoque crítico (2 un). Histórico SAP indica consumo de 4 un/mês. Risco de ruptura em 15 dias.',
-        action: 'Gerar pedido de compra automático?',
+        titleKey: 'notif.1.title',
+        messageKey: 'notif.1.message',
+        actionKey: 'notif.1.action',
     },
     {
         id: 2,
         type: 'insight',
-        title: 'INSIGHT DE FORNECEDOR',
-        message: '📊 Análise de 847 ordens: Fornecedor "Rolamentos Brasil" entrega 23% mais rápido que "MecParts". Preço 8% maior, mas lead time 12 dias menor.',
-        action: 'Ver comparativo completo de fornecedores?',
+        titleKey: 'notif.2.title',
+        messageKey: 'notif.2.message',
+        actionKey: 'notif.2.action',
     },
     {
         id: 3,
         type: 'prediction',
-        title: 'PREDIÇÃO DE CONSUMO',
-        message: '📦 Baseado em sazonalidade + paradas programadas: Estoque de correias vai zerar em 21 dias. Pedido sugerido: 45 unidades.',
-        action: 'Aprovar sugestão de compra?',
+        titleKey: 'notif.3.title',
+        messageKey: 'notif.3.message',
+        actionKey: 'notif.3.action',
     },
 
     // === PLANEJAMENTO DE MANUTENÇÃO ===
     {
         id: 4,
         type: 'alert',
-        title: 'CONFLITO DE PLANEJAMENTO',
-        message: '🔧 3 ordens de manutenção agendadas para mesmo horário no setor Caldeiras. Técnico João já alocado em 2 OS simultâneas.',
-        action: 'Rebalancear agenda automaticamente?',
+        titleKey: 'notif.4.title',
+        messageKey: 'notif.4.message',
+        actionKey: 'notif.4.action',
     },
     {
         id: 5,
         type: 'insight',
-        title: 'INSIGHT DE BACKLOG',
-        message: '📈 Backlog de manutenção cresceu 34% este mês. 47 ordens atrasadas. Principal gargalo: falta de peças (67%) e mão de obra (33%).',
-        action: 'Analisar causas raiz do backlog?',
+        titleKey: 'notif.5.title',
+        messageKey: 'notif.5.message',
+        actionKey: 'notif.5.action',
     },
     {
         id: 6,
         type: 'prediction',
-        title: 'RISCO DE PARADA',
-        message: '🚨 Compressor C-07: vibrações + temperatura elevada. Modelo prevê falha em 72h com 94% de confiança. Custo da parada: R$ 180.000/dia.',
-        action: 'Criar ordem de manutenção urgente?',
+        titleKey: 'notif.6.title',
+        messageKey: 'notif.6.message',
+        actionKey: 'notif.6.action',
     },
 
     // === CADEIA DE SUPRIMENTOS ===
     {
         id: 7,
         type: 'alert',
-        title: 'CADEIA CRÍTICA',
-        message: '🚛 Peça importada (Selo Mecânico Burgmann) com lead time de 45 dias. 3 equipamentos dependem. Alternativa nacional disponível.',
-        action: 'Ver fornecedores alternativos?',
+        titleKey: 'notif.7.title',
+        messageKey: 'notif.7.message',
+        actionKey: 'notif.7.action',
     },
     {
         id: 8,
         type: 'insight',
-        title: 'CORRELAÇÃO SAP',
-        message: '🔗 Detectado: Quando Bomba P-201 falha, Trocador T-05 falha em 72h (89% dos casos). SAP não correlaciona. Manutenção conjunta recomendada.',
-        action: 'Criar plano de manutenção integrado?',
+        titleKey: 'notif.8.title',
+        messageKey: 'notif.8.message',
+        actionKey: 'notif.8.action',
     },
 
     // === DORES DE CABEÇA COMUNS ===
     {
         id: 9,
         type: 'alert',
-        title: 'GARANTIA EXPIRANDO',
-        message: '⏰ Motor WEG W22 (R$ 47.000) com garantia até 28/12. SAP registra 3 anomalias não reportadas ao fabricante. Perda potencial de cobertura.',
-        action: 'Abrir chamado de garantia agora?',
+        titleKey: 'notif.9.title',
+        messageKey: 'notif.9.message',
+        actionKey: 'notif.9.action',
     },
     {
         id: 10,
         type: 'prediction',
-        title: 'OTIMIZAÇÃO DE CUSTO',
-        message: '💰 Análise de 18 meses: Manter Redutor R-12 custa R$ 8.400/mês. Substituir por novo: payback em 7 meses. Economia anual: R$ 52.000.',
-        action: 'Gerar business case para substituição?',
+        titleKey: 'notif.10.title',
+        messageKey: 'notif.10.message',
+        actionKey: 'notif.10.action',
     },
     {
         id: 11,
         type: 'insight',
-        title: 'PADRÃO DETECTADO',
-        message: '🔍 Turno da noite tem 43% mais falhas que turno do dia. Correlação: operadores do noturno pulam checklist de partida (confirmado via IoT).',
-        action: 'Enviar alerta para supervisão?',
+        titleKey: 'notif.11.title',
+        messageKey: 'notif.11.message',
+        actionKey: 'notif.11.action',
     },
     {
         id: 12,
         type: 'alert',
-        title: 'SLA CONTRATUAL',
-        message: '📋 Contrato com AMBEV exige 98% de disponibilidade. Atual: 96.2%. Risco de multa: R$ 320.000. Principais vilões: Linha 3 e Caldeira 2.',
-        action: 'Ver plano de ação sugerido?',
+        titleKey: 'notif.12.title',
+        messageKey: 'notif.12.message',
+        actionKey: 'notif.12.action',
     },
 ];
 
 
 const CognitiveAlert: React.FC = () => {
+    const { t } = useLanguage();
     const [isActive, setIsActive] = useState(false);
     const [currentNotification, setCurrentNotification] = useState<CognitiveNotification | null>(null);
     const [showDomIndicator, setShowDomIndicator] = useState(false);
@@ -164,8 +166,8 @@ const CognitiveAlert: React.FC = () => {
             // Fase 2: Após 1.2s, mostrar a notificação
             setTimeout(() => {
                 setShowDomIndicator(false);
-                setCurrentNotification(notifications[notificationIndex]);
-                notificationIndex = (notificationIndex + 1) % notifications.length;
+                setCurrentNotification(notificationKeys[notificationIndex]);
+                notificationIndex = (notificationIndex + 1) % notificationKeys.length;
             }, 1200);
 
             // Fase 3: Auto-hide após 12 segundos SE não houver interação
@@ -325,24 +327,28 @@ const CognitiveAlert: React.FC = () => {
                         boxShadow: '0 8px 32px rgba(0, 102, 255, 0.6), 0 0 60px rgba(0, 102, 255, 0.3)',
                         animation: 'slideDown 0.4s ease-out',
                         border: '1px solid rgba(255, 255, 255, 0.2)',
+                        maxWidth: 'calc(100vw - 40px)',
                     }}
                 >
                     <SyncOutlined spin style={{ color: '#ffffff', fontSize: '18px' }} />
                     <Text style={{ color: '#ffffff', fontSize: '14px', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '1px' }}>
-                        Acessando Cognição...
+                        {t('cognitive.accessing')}
                     </Text>
                 </div>
             )}
 
-            {/* Cognitive Notification with Interaction */}
+            {/* Cognitive Notification with Interaction - RESPONSIVE */}
             {currentNotification && (
                 <div
                     style={{
                         position: 'fixed',
                         top: '20px',
                         right: '20px',
+                        left: '20px',
                         zIndex: 9999,
-                        width: '420px',
+                        width: 'auto',
+                        maxWidth: '420px',
+                        marginLeft: 'auto',
                         background: 'rgba(10, 10, 15, 0.98)',
                         border: `2px solid ${getTypeColor(currentNotification.type)}`,
                         borderRadius: '16px',
@@ -360,6 +366,7 @@ const CognitiveAlert: React.FC = () => {
                             padding: '14px 18px',
                             background: `linear-gradient(90deg, ${getTypeColor(currentNotification.type)}25, transparent)`,
                             borderBottom: `1px solid ${getTypeColor(currentNotification.type)}40`,
+                            flexWrap: 'wrap',
                         }}
                     >
                         {currentNotification.type === 'insight' && (
@@ -378,13 +385,13 @@ const CognitiveAlert: React.FC = () => {
                                 fontWeight: 700,
                                 letterSpacing: '2px',
                                 fontFamily: 'monospace',
+                                flex: '1 1 auto',
                             }}
                         >
-                            {currentNotification.title}
+                            {t(currentNotification.titleKey)}
                         </Text>
                         <div
                             style={{
-                                marginLeft: 'auto',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '6px',
@@ -401,7 +408,7 @@ const CognitiveAlert: React.FC = () => {
                                 }}
                             />
                             <Text style={{ color: 'rgba(255,255,255,0.5)', fontSize: '11px', fontFamily: 'monospace' }}>
-                                LIVE
+                                {t('cognitive.live')}
                             </Text>
                         </div>
                     </div>
@@ -416,11 +423,11 @@ const CognitiveAlert: React.FC = () => {
                                 display: 'block',
                             }}
                         >
-                            {currentNotification.message}
+                            {t(currentNotification.messageKey)}
                         </Text>
 
                         {/* Action Question */}
-                        {currentNotification.action && !showFeedback && (
+                        {currentNotification.actionKey && !showFeedback && (
                             <div
                                 style={{
                                     marginTop: '16px',
@@ -438,10 +445,10 @@ const CognitiveAlert: React.FC = () => {
                                         marginBottom: '14px',
                                     }}
                                 >
-                                    💡 {currentNotification.action}
+                                    💡 {t(currentNotification.actionKey)}
                                 </Text>
 
-                                <Space size="middle">
+                                <Space size="middle" wrap>
                                     <Button
                                         type="primary"
                                         icon={<CheckOutlined />}
@@ -454,7 +461,7 @@ const CognitiveAlert: React.FC = () => {
                                             boxShadow: `0 4px 16px ${getTypeColor(currentNotification.type)}40`,
                                         }}
                                     >
-                                        Sim, fazer isso
+                                        {t('alert.yes')}
                                     </Button>
                                     <Button
                                         type="text"
@@ -465,7 +472,7 @@ const CognitiveAlert: React.FC = () => {
                                             borderRadius: '8px',
                                         }}
                                     >
-                                        Agora não
+                                        {t('alert.no')}
                                     </Button>
                                 </Space>
                             </div>
@@ -484,13 +491,14 @@ const CognitiveAlert: React.FC = () => {
                                     alignItems: 'center',
                                     gap: '10px',
                                     animation: 'fadeIn 0.3s ease-out',
+                                    flexWrap: 'wrap',
                                 }}
                             >
                                 <CheckOutlined style={{ color: '#00ff88', fontSize: '18px' }} />
-                                <Text style={{ color: '#00ff88', fontWeight: 600 }}>
-                                    Ação registrada! Abrindo painel...
+                                <Text style={{ color: '#00ff88', fontWeight: 600, flex: '1 1 auto' }}>
+                                    {t('alert.accepted')}
                                 </Text>
-                                <RightOutlined style={{ color: '#00ff88', marginLeft: 'auto' }} />
+                                <RightOutlined style={{ color: '#00ff88' }} />
                             </div>
                         )}
 
@@ -508,7 +516,7 @@ const CognitiveAlert: React.FC = () => {
                                 }}
                             >
                                 <Text style={{ color: 'rgba(255,255,255,0.5)' }}>
-                                    Entendido. Continuaremos monitorando.
+                                    {t('alert.dismissed')}
                                 </Text>
                             </div>
                         )}
@@ -607,6 +615,15 @@ const CognitiveAlert: React.FC = () => {
                     to {
                         opacity: 1;
                         transform: translateY(0);
+                    }
+                }
+
+                /* Mobile Responsive Adjustments */
+                @media (max-width: 480px) {
+                    .cognitive-notification {
+                        left: 10px !important;
+                        right: 10px !important;
+                        max-width: none !important;
                     }
                 }
             `}</style>

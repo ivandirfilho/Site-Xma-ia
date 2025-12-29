@@ -68,12 +68,12 @@ const translations: Record<Language, Record<string, string>> = {
         'insights.terminal.header': 'xma.ia neural-edge-v2.4.1 — Live Feed',
         'insights.connected': 'Conectado ao SAP',
         'insights.processing': 'Processando próximo insight...',
-        
+
         // Insights Data Items (Simplified for demo)
         'insight.stock.title': '⚠️ Estoque Crítico - Rolamento SKF 6205',
         'insight.stock.desc': 'Apenas 2 unidades em estoque. Consumo médio SAP: 4 un/mês. Lead time do fornecedor: 18 dias. Risco de ruptura em 15 dias se não comprar agora.',
         'insight.stock.value': 'Pedido sugerido: 12 unidades',
-        
+
         'insight.vendor.title': '📊 Comparativo de Fornecedores',
         'insight.vendor.desc': 'Análise automática: "Rolamentos Brasil" entrega 23% mais rápido que "MecParts". Custo 8% maior, mas economia de 12 dias em lead time. Histórico de 98% de entregas no prazo.',
         'insight.vendor.value': 'Economia potencial em paradas: R$ 45.000/mês',
@@ -156,6 +156,107 @@ const translations: Record<Language, Record<string, string>> = {
         'dashboard.action.maintenance': '🔧 Criar Ordem de Manutenção',
         'dashboard.action.report': '📊 Exportar Relatório',
         'dashboard.action.notify': '📧 Notificar Equipe',
+
+        // Cognitive Alert Component
+        'cognitive.accessing': 'Acessando Cognição...',
+        'cognitive.live': 'LIVE',
+
+        // Notification 1 - Stock Alert
+        'notif.1.title': 'ALERTA DE ESTOQUE',
+        'notif.1.message': '⚠️ Rolamento SKF 6205-2RS com estoque crítico (2 un). Histórico SAP indica consumo de 4 un/mês. Risco de ruptura em 15 dias.',
+        'notif.1.action': 'Gerar pedido de compra automático?',
+
+        // Notification 2 - Supplier Insight
+        'notif.2.title': 'INSIGHT DE FORNECEDOR',
+        'notif.2.message': '📊 Análise de 847 ordens: Fornecedor "Rolamentos Brasil" entrega 23% mais rápido que "MecParts". Preço 8% maior, mas lead time 12 dias menor.',
+        'notif.2.action': 'Ver comparativo completo de fornecedores?',
+
+        // Notification 3 - Consumption Prediction
+        'notif.3.title': 'PREDIÇÃO DE CONSUMO',
+        'notif.3.message': '📦 Baseado em sazonalidade + paradas programadas: Estoque de correias vai zerar em 21 dias. Pedido sugerido: 45 unidades.',
+        'notif.3.action': 'Aprovar sugestão de compra?',
+
+        // Notification 4 - Planning Conflict
+        'notif.4.title': 'CONFLITO DE PLANEJAMENTO',
+        'notif.4.message': '🔧 3 ordens de manutenção agendadas para mesmo horário no setor Caldeiras. Técnico João já alocado em 2 OS simultâneas.',
+        'notif.4.action': 'Rebalancear agenda automaticamente?',
+
+        // Notification 5 - Backlog Insight
+        'notif.5.title': 'INSIGHT DE BACKLOG',
+        'notif.5.message': '📈 Backlog de manutenção cresceu 34% este mês. 47 ordens atrasadas. Principal gargalo: falta de peças (67%) e mão de obra (33%).',
+        'notif.5.action': 'Analisar causas raiz do backlog?',
+
+        // Notification 6 - Stop Risk
+        'notif.6.title': 'RISCO DE PARADA',
+        'notif.6.message': '🚨 Compressor C-07: vibrações + temperatura elevada. Modelo prevê falha em 72h com 94% de confiança. Custo da parada: R$ 180.000/dia.',
+        'notif.6.action': 'Criar ordem de manutenção urgente?',
+
+        // Notification 7 - Critical Chain
+        'notif.7.title': 'CADEIA CRÍTICA',
+        'notif.7.message': '🚛 Peça importada (Selo Mecânico Burgmann) com lead time de 45 dias. 3 equipamentos dependem. Alternativa nacional disponível.',
+        'notif.7.action': 'Ver fornecedores alternativos?',
+
+        // Notification 8 - SAP Correlation
+        'notif.8.title': 'CORRELAÇÃO SAP',
+        'notif.8.message': '🔗 Detectado: Quando Bomba P-201 falha, Trocador T-05 falha em 72h (89% dos casos). SAP não correlaciona. Manutenção conjunta recomendada.',
+        'notif.8.action': 'Criar plano de manutenção integrado?',
+
+        // Notification 9 - Warranty Expiring
+        'notif.9.title': 'GARANTIA EXPIRANDO',
+        'notif.9.message': '⏰ Motor WEG W22 (R$ 47.000) com garantia até 28/12. SAP registra 3 anomalias não reportadas ao fabricante. Perda potencial de cobertura.',
+        'notif.9.action': 'Abrir chamado de garantia agora?',
+
+        // Notification 10 - Cost Optimization
+        'notif.10.title': 'OTIMIZAÇÃO DE CUSTO',
+        'notif.10.message': '💰 Análise de 18 meses: Manter Redutor R-12 custa R$ 8.400/mês. Substituir por novo: payback em 7 meses. Economia anual: R$ 52.000.',
+        'notif.10.action': 'Gerar business case para substituição?',
+
+        // Notification 11 - Pattern Detected
+        'notif.11.title': 'PADRÃO DETECTADO',
+        'notif.11.message': '🔍 Turno da noite tem 43% mais falhas que turno do dia. Correlação: operadores do noturno pulam checklist de partida (confirmado via IoT).',
+        'notif.11.action': 'Enviar alerta para supervisão?',
+
+        // Notification 12 - SLA Contract
+        'notif.12.title': 'SLA CONTRATUAL',
+        'notif.12.message': '📋 Contrato com AMBEV exige 98% de disponibilidade. Atual: 96.2%. Risco de multa: R$ 320.000. Principais vilões: Linha 3 e Caldeira 2.',
+        'notif.12.action': 'Ver plano de ação sugerido?',
+
+        // Dashboard Content
+        'dash.erp.title': 'ERP INTEGRITY ANOMALY',
+        'dash.erp.sapEntry': 'SAP ECC6 ENTRY',
+        'dash.erp.material': 'Material: Rolamento SKF',
+        'dash.erp.contract': 'CONTRATO CLÁUSULA 4.2',
+        'dash.erp.limit': 'Limite Aprovado',
+        'dash.erp.inconsistency': '⚠️ Inconsistência Detectada: Valor excede limite contratual em 12%',
+        'dash.erp.notify': 'Notificar Compras',
+
+        'dash.audit.title': 'AUDITORIA DE EXECUÇÃO',
+        'dash.audit.completed': 'CONCLUÍDA',
+        'dash.audit.technician': 'Técnico: Carlos Silva',
+        'dash.audit.task': 'Troca de Rolamento - Bomba P-201',
+        'dash.audit.sensor': 'SENSOR DE TORQUE - TEMPO REAL',
+        'dash.audit.insight': '🔍 Insight: Assinatura de torque não reconhecida. Possível execução imprópria no Rolamento #4',
+        'dash.audit.open': 'Abrir Auditoria',
+
+        'dash.planning.title': 'EVOLUÇÃO DO PLANEJAMENTO',
+        'dash.planning.availability': 'Q4 2024 - DISPONIBILIDADE',
+        'dash.planning.original': 'Plano Original',
+        'dash.planning.optimized': 'Plano Otimizado IA',
+        'dash.planning.current': 'ATUAL',
+        'dash.planning.projected': 'PROJETADO',
+        'dash.planning.apply': 'Aplicar Otimização: +15% Disponibilidade',
+
+        'dash.stock.title': 'ANÁLISE DE ESTOQUE',
+        'dash.stock.bearing': 'Rolamento SKF 6205',
+        'dash.stock.criticalUnits': '2 un (Crítico)',
+        'dash.stock.belt': 'Correia A-68',
+        'dash.stock.lowUnits': '8 un (Baixo)',
+        'dash.stock.seal': 'Selo Mecânico',
+        'dash.stock.okUnits': '24 un (OK)',
+
+        'dash.suppliers.title': 'RANKING FORNECEDORES',
+
+        'dash.actions.title': 'AÇÕES RÁPIDAS',
     },
     'en-US': {
         // Header
@@ -302,6 +403,107 @@ const translations: Record<Language, Record<string, string>> = {
         'dashboard.action.maintenance': '🔧 Create Maintenance Order',
         'dashboard.action.report': '📊 Export Report',
         'dashboard.action.notify': '📧 Notify Team',
+
+        // Cognitive Alert Component
+        'cognitive.accessing': 'Accessing Cognition...',
+        'cognitive.live': 'LIVE',
+
+        // Notification 1 - Stock Alert
+        'notif.1.title': 'STOCK ALERT',
+        'notif.1.message': '⚠️ SKF 6205-2RS bearing with critical stock (2 units). SAP history indicates consumption of 4 units/month. Stockout risk in 15 days.',
+        'notif.1.action': 'Generate automatic purchase order?',
+
+        // Notification 2 - Supplier Insight
+        'notif.2.title': 'SUPPLIER INSIGHT',
+        'notif.2.message': '📊 Analysis of 847 orders: "Rolamentos Brasil" delivers 23% faster than "MecParts". Price 8% higher, but lead time 12 days shorter.',
+        'notif.2.action': 'View full supplier comparison?',
+
+        // Notification 3 - Consumption Prediction
+        'notif.3.title': 'CONSUMPTION PREDICTION',
+        'notif.3.message': '📦 Based on seasonality + scheduled stops: Belt stock will zero in 21 days. Suggested order: 45 units.',
+        'notif.3.action': 'Approve purchase suggestion?',
+
+        // Notification 4 - Planning Conflict
+        'notif.4.title': 'PLANNING CONFLICT',
+        'notif.4.message': '🔧 3 maintenance orders scheduled for same time in Boilers sector. Technician João already allocated to 2 simultaneous WOs.',
+        'notif.4.action': 'Automatically rebalance schedule?',
+
+        // Notification 5 - Backlog Insight
+        'notif.5.title': 'BACKLOG INSIGHT',
+        'notif.5.message': '📈 Maintenance backlog grew 34% this month. 47 delayed orders. Main bottleneck: lack of parts (67%) and labor (33%).',
+        'notif.5.action': 'Analyze root causes?',
+
+        // Notification 6 - Stop Risk
+        'notif.6.title': 'DOWNTIME RISK',
+        'notif.6.message': '🚨 Compressor C-07: vibrations + elevated temperature. Model predicts failure in 72h with 94% confidence. Downtime cost: $180,000/day.',
+        'notif.6.action': 'Create urgent maintenance order?',
+
+        // Notification 7 - Critical Chain
+        'notif.7.title': 'CRITICAL CHAIN',
+        'notif.7.message': '🚛 Imported part (Burgmann Mechanical Seal) with 45-day lead time. 3 machines depend on it. National alternative available.',
+        'notif.7.action': 'View alternative suppliers?',
+
+        // Notification 8 - SAP Correlation
+        'notif.8.title': 'SAP CORRELATION',
+        'notif.8.message': '🔗 Detected: When Pump P-201 fails, Exchanger T-05 fails within 72h (89% of cases). SAP doesn\'t correlate. Joint maintenance recommended.',
+        'notif.8.action': 'Create integrated maintenance plan?',
+
+        // Notification 9 - Warranty Expiring
+        'notif.9.title': 'WARRANTY EXPIRING',
+        'notif.9.message': '⏰ WEG W22 Motor ($47,000) with warranty until 12/28. SAP records 3 unreported anomalies to manufacturer. Potential coverage loss.',
+        'notif.9.action': 'Open warranty claim now?',
+
+        // Notification 10 - Cost Optimization
+        'notif.10.title': 'COST OPTIMIZATION',
+        'notif.10.message': '💰 18-month analysis: Maintaining R-12 Reducer costs $8,400/month. Replacing with new: payback in 7 months. Annual savings: $52,000.',
+        'notif.10.action': 'Generate replacement business case?',
+
+        // Notification 11 - Pattern Detected
+        'notif.11.title': 'PATTERN DETECTED',
+        'notif.11.message': '🔍 Night shift has 43% more failures than day shift. Correlation: night operators skip startup checklist (confirmed via IoT).',
+        'notif.11.action': 'Send alert to supervision?',
+
+        // Notification 12 - SLA Contract
+        'notif.12.title': 'SLA CONTRACT',
+        'notif.12.message': '📋 Contract with AMBEV requires 98% availability. Current: 96.2%. Penalty risk: $320,000. Main culprits: Line 3 and Boiler 2.',
+        'notif.12.action': 'View suggested action plan?',
+
+        // Dashboard Content
+        'dash.erp.title': 'ERP INTEGRITY ANOMALY',
+        'dash.erp.sapEntry': 'SAP ECC6 ENTRY',
+        'dash.erp.material': 'Material: SKF Bearing',
+        'dash.erp.contract': 'CONTRACT CLAUSE 4.2',
+        'dash.erp.limit': 'Approved Limit',
+        'dash.erp.inconsistency': '⚠️ Inconsistency Detected: Value exceeds contractual limit by 12%',
+        'dash.erp.notify': 'Notify Purchasing',
+
+        'dash.audit.title': 'EXECUTION AUDIT',
+        'dash.audit.completed': 'COMPLETED',
+        'dash.audit.technician': 'Technician: Carlos Silva',
+        'dash.audit.task': 'Bearing Replacement - Pump P-201',
+        'dash.audit.sensor': 'TORQUE SENSOR - REAL TIME',
+        'dash.audit.insight': '🔍 Insight: Torque signature not recognized. Possible improper execution on Bearing #4',
+        'dash.audit.open': 'Open Audit',
+
+        'dash.planning.title': 'PLANNING EVOLUTION',
+        'dash.planning.availability': 'Q4 2024 - AVAILABILITY',
+        'dash.planning.original': 'Original Plan',
+        'dash.planning.optimized': 'AI Optimized Plan',
+        'dash.planning.current': 'CURRENT',
+        'dash.planning.projected': 'PROJECTED',
+        'dash.planning.apply': 'Apply Optimization: +15% Availability',
+
+        'dash.stock.title': 'STOCK ANALYSIS',
+        'dash.stock.bearing': 'SKF 6205 Bearing',
+        'dash.stock.criticalUnits': '2 units (Critical)',
+        'dash.stock.belt': 'Belt A-68',
+        'dash.stock.lowUnits': '8 units (Low)',
+        'dash.stock.seal': 'Mechanical Seal',
+        'dash.stock.okUnits': '24 units (OK)',
+
+        'dash.suppliers.title': 'SUPPLIER RANKING',
+
+        'dash.actions.title': 'QUICK ACTIONS',
     },
 };
 
