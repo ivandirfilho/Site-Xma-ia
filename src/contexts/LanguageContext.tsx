@@ -17,6 +17,7 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.solutions': 'Soluções',
         'nav.about': 'Sobre',
         'nav.login': 'Entrar',
+        'nav.language': 'Idioma',
 
         // Hero
         'hero.badge': 'Neural Edge Industrial',
@@ -264,6 +265,7 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.solutions': 'Solutions',
         'nav.about': 'About',
         'nav.login': 'Sign In',
+        'nav.language': 'Language',
 
         // Hero
         'hero.badge': 'Neural Edge Industrial',
