@@ -4,6 +4,7 @@ import React from 'react';
 import { Typography, Button, Space } from 'antd';
 import { RocketOutlined, EyeOutlined } from '@ant-design/icons';
 import dynamic from 'next/dynamic';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ParticleBackground = dynamic(() => import('./ParticleBackground'), {
     ssr: false,
@@ -12,6 +13,8 @@ const ParticleBackground = dynamic(() => import('./ParticleBackground'), {
 const { Title, Paragraph } = Typography;
 
 const HeroSection: React.FC = () => {
+    const { t } = useLanguage();
+
     return (
         <section
             style={{
@@ -79,7 +82,7 @@ const HeroSection: React.FC = () => {
                         }}
                     />
                     <span style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '14px', fontWeight: 500 }}>
-                        Neural Edge Industrial
+                        {t('hero.badge')}
                     </span>
                 </div>
 
@@ -98,7 +101,7 @@ const HeroSection: React.FC = () => {
                         animationFillMode: 'forwards',
                     }}
                 >
-                    A Digitalização Foi Apenas o Começo.{' '}
+                    {t('hero.title.part1')}{' '}
                     <span
                         style={{
                             background: 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)',
@@ -107,7 +110,7 @@ const HeroSection: React.FC = () => {
                             backgroundClip: 'text',
                         }}
                     >
-                        Bem-vindo à Cognição Industrial.
+                        {t('hero.title.part2')}
                     </span>
                 </Title>
 
@@ -125,18 +128,19 @@ const HeroSection: React.FC = () => {
                         animationFillMode: 'forwards',
                     }}
                 >
-                    A primeira plataforma AI-Native que funde Engenharia, Telemetria e Inteligência
-                    Contratual. Saia dos dashboards passivos e entre na era da decisão autônoma.
+                    {t('hero.subtitle')}
                 </Paragraph>
 
                 {/* CTA Buttons */}
                 <Space
                     size="large"
+                    wrap
                     className="animate-fade-in-up"
                     style={{
                         opacity: 0,
                         animationDelay: '0.4s',
                         animationFillMode: 'forwards',
+                        justifyContent: 'center',
                     }}
                 >
                     <Button
@@ -154,7 +158,7 @@ const HeroSection: React.FC = () => {
                             boxShadow: '0 8px 32px rgba(0, 102, 255, 0.4)',
                         }}
                     >
-                        Solicitar Acesso (Demo)
+                        {t('hero.cta.demo')}
                     </Button>
 
                     <Button
@@ -172,7 +176,7 @@ const HeroSection: React.FC = () => {
                             color: '#ffffff',
                         }}
                     >
-                        Ver Tecnologia AI Native Cognitive
+                        {t('hero.cta.video')}
                     </Button>
                 </Space>
 

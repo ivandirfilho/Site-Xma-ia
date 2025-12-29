@@ -2,10 +2,13 @@
 
 import React from 'react';
 import { Row, Col, Typography, Divider } from 'antd';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const { Paragraph } = Typography;
 
 const Footer: React.FC = () => {
+    const { t } = useLanguage();
+
     return (
         <footer
             style={{
@@ -26,12 +29,12 @@ const Footer: React.FC = () => {
                             marginBottom: '24px',
                         }}
                     >
-                        Tecnologia & Parceiros
+                        {t('footer.partners')}
                     </Paragraph>
 
                     <Row gutter={[48, 24]} justify="center" align="middle">
                         {/* MENDIX */}
-                        <Col>
+                        <Col xs={24} md={8}>
                             <div
                                 style={{
                                     padding: '16px 32px',
@@ -41,6 +44,7 @@ const Footer: React.FC = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '12px',
+                                    justifyContent: 'center',
                                 }}
                             >
                                 <span style={{ fontSize: '24px' }}>🔧</span>
@@ -49,14 +53,14 @@ const Footer: React.FC = () => {
                                         MENDIX
                                     </div>
                                     <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }}>
-                                        Siemens ISV Partner
+                                        {t('footer.mendix.role')}
                                     </div>
                                 </div>
                             </div>
                         </Col>
 
                         {/* NVIDIA */}
-                        <Col>
+                        <Col xs={24} md={8}>
                             <div
                                 style={{
                                     padding: '16px 32px',
@@ -66,6 +70,7 @@ const Footer: React.FC = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '12px',
+                                    justifyContent: 'center',
                                 }}
                             >
                                 <span style={{ fontSize: '24px' }}>⚡</span>
@@ -74,14 +79,14 @@ const Footer: React.FC = () => {
                                         NVIDIA
                                     </div>
                                     <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }}>
-                                        Accelerated Computing
+                                        {t('footer.nvidia.role')}
                                     </div>
                                 </div>
                             </div>
                         </Col>
 
                         {/* Big 4 Compliance */}
-                        <Col>
+                        <Col xs={24} md={8}>
                             <div
                                 style={{
                                     padding: '16px 32px',
@@ -91,15 +96,16 @@ const Footer: React.FC = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '12px',
+                                    justifyContent: 'center',
                                 }}
                             >
                                 <span style={{ fontSize: '24px' }}>🛡️</span>
                                 <div style={{ textAlign: 'left' }}>
                                     <div style={{ fontSize: '14px', fontWeight: 600, color: '#0066ff' }}>
-                                        Global Big 4
+                                        {t('footer.big4.title')}
                                     </div>
                                     <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.5)' }}>
-                                        Audit Compatible
+                                        {t('footer.big4.role')}
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +135,7 @@ const Footer: React.FC = () => {
                                     XMA.IA
                                 </div>
                                 <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.4)' }}>
-                                    Manutenção Autônoma AI-Native
+                                    {t('footer.tagline')}
                                 </div>
                             </div>
                         </div>
@@ -143,7 +149,7 @@ const Footer: React.FC = () => {
                                 margin: 0,
                             }}
                         >
-                            © {new Date().getFullYear()} XMA.IA. Todos os direitos reservados.
+                            © {new Date().getFullYear()} XMA.IA. {t('footer.rights')}
                         </Paragraph>
                     </Col>
                 </Row>

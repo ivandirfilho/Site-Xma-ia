@@ -19,12 +19,11 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.login': 'Entrar',
 
         // Hero
-        'hero.badge': 'Plataforma AI-Native para Manutenção Industrial',
-        'hero.title1': 'Evolução Cognitiva',
-        'hero.title2': 'para Manutenção',
-        'hero.title3': 'Industrial',
-        'hero.subtitle': 'Transformamos dados brutos de sensores industriais em decisões autônomas. Nossa IA não apenas prevê falhas — ela entende o contexto operacional e age em tempo real.',
-        'hero.cta.demo': 'Agendar Demo',
+        'hero.badge': 'Neural Edge Industrial',
+        'hero.title.part1': 'A Digitalização Foi Apenas o Começo.',
+        'hero.title.part2': 'Bem-vindo à Cognição Industrial.',
+        'hero.subtitle': 'A primeira plataforma AI-Native que funde Engenharia, Telemetria e Inteligência Contratual. Saia dos dashboards passivos e entre na era da decisão autônoma.',
+        'hero.cta.demo': 'Solicitar Acesso (Demo)',
         'hero.cta.video': 'Ver Tecnologia AI Native Cognitive',
 
         // Stats
@@ -34,10 +33,23 @@ const translations: Record<Language, Record<string, string>> = {
         'stats.uptime': 'Uptime Médio',
 
         // Features
-        'features.badge': 'ARQUITETURA NEURAL ÚNICA',
-        'features.title': 'Cognição Industrial,',
-        'features.title2': 'Não Apenas Predição',
-        'features.subtitle': 'Enquanto outros preveem falhas, nós as evitamos autonomamente.',
+        'features.badge': 'Diferenciais Técnicos',
+        'features.title': 'Tecnologia de Ponta para',
+        'features.title.highlight': 'Decisões Autônomas',
+        'features.subtitle': 'Nossa stack combina física avançada, processamento de sinais e compliance automatizado.',
+
+        // Bento Grid Items
+        'feature.validation.category': 'Validação',
+        'feature.validation.title': 'Validação Física da Manutenção',
+        'feature.validation.desc': 'O técnico disse que fez, mas a máquina concorda? Cruzamos o input humano com a telemetria para garantir que a manutenção foi eficaz, não apenas burocrática.',
+
+        'feature.audit.category': 'Auditoria',
+        'feature.audit.title': 'Auditoria Cruzada (Cognitive Data)',
+        'feature.audit.desc': 'Os nossos agentes leem os seus contratos e comparam com os lançamentos no SAP em tempo real. Encontramos inconsistências financeiras que humanos deixariam passar.',
+
+        'feature.legal.category': 'Legal',
+        'feature.legal.title': 'Compliance Nativo',
+        'feature.legal.desc': 'Cruzamento automático de falhas técnicas com SLAs contratuais e garantias de fornecedores.',
 
         'feature.neural.title': 'Neural Edge Computing',
         'feature.neural.desc': 'Processamento de IA diretamente no chão de fábrica. Latência < 10ms para decisões críticas. Funciona offline.',
@@ -51,21 +63,53 @@ const translations: Record<Language, Record<string, string>> = {
         // Live Insights
         'insights.badge': 'SISTEMA VIVO',
         'insights.title': 'Cognição em Tempo Real sobre',
-        'insights.title2': 'Dados SAP',
+        'insights.title.highlight': 'Dados SAP',
         'insights.subtitle': 'Veja como evoluímos a inteligência do que já está digitalizado. Cada insight é gerado automaticamente pela fusão de telemetria + ERP.',
+        'insights.terminal.header': 'xma.ia neural-edge-v2.4.1 — Live Feed',
         'insights.connected': 'Conectado ao SAP',
         'insights.processing': 'Processando próximo insight...',
+        
+        // Insights Data Items (Simplified for demo)
+        'insight.stock.title': '⚠️ Estoque Crítico - Rolamento SKF 6205',
+        'insight.stock.desc': 'Apenas 2 unidades em estoque. Consumo médio SAP: 4 un/mês. Lead time do fornecedor: 18 dias. Risco de ruptura em 15 dias se não comprar agora.',
+        'insight.stock.value': 'Pedido sugerido: 12 unidades',
+        
+        'insight.vendor.title': '📊 Comparativo de Fornecedores',
+        'insight.vendor.desc': 'Análise automática: "Rolamentos Brasil" entrega 23% mais rápido que "MecParts". Custo 8% maior, mas economia de 12 dias em lead time. Histórico de 98% de entregas no prazo.',
+        'insight.vendor.value': 'Economia potencial em paradas: R$ 45.000/mês',
+
+        'insight.demand.title': '📦 Previsão de Consumo Sazonal',
+        'insight.demand.desc': 'Baseado em histórico + paradas programadas de dezembro: Correias transportadoras vão zerar em 21 dias. Aumento de 67% na demanda esperado.',
+        'insight.demand.value': 'Pedido sugerido: 45 correias A-68',
+
+        'insight.conflict.title': '🔧 Conflito de Alocação Detectado',
+        'insight.conflict.desc': '3 ordens de manutenção agendadas para 14h no setor Caldeiras. Técnico Carlos já alocado em 2 OS simultâneas. Recurso disponível: Técnico Ricardo (livre às 15h).',
+        'insight.conflict.value': 'Clique para rebalancear automaticamente',
+
+        'insight.backlog.title': '📈 Backlog Crescente - Atenção!',
+        'insight.backlog.desc': 'Backlog de manutenção cresceu 34% este mês. 47 ordens atrasadas. Causas identificadas: Falta de peças (67%), Mão de obra insuficiente (23%), Priorização incorreta (10%).',
+        'insight.backlog.value': 'Impacto: R$ 180.000 em risco de parada',
+
+        'insight.prevented.title': '✅ Modelo Acertou - Falha Evitada',
+        'insight.prevented.desc': 'Compressor C-03: falha prevista há 12 dias foi confirmada na inspeção preventiva. Substituição do selo realizada. Parada não-programada de 16h evitada.',
+        'insight.prevented.value': 'Economia confirmada: R$ 288.000',
+
+        // Stats
         'insights.stats.orders': 'Ordens SAP Analisadas',
-        'insights.stats.predictions': 'Falhas Previstas',
-        'insights.stats.accuracy': 'acurácia',
+        'insights.stats.predictions': 'Acerto Preditivo',
         'insights.stats.savings': 'Economia Gerada',
-        'insights.stats.period': 'últimos 30 dias',
-        'insights.stats.today': 'hoje',
+        'insights.stats.trend.orders': '+342 hoje',
+        'insights.stats.trend.accuracy': 'acurácia',
+        'insights.stats.trend.savings': 'últimos 30 dias',
 
         // Footer
         'footer.partners': 'Tecnologia & Parceiros',
-        'footer.rights': 'Todos os direitos reservados.',
+        'footer.mendix.role': 'Siemens ISV Partner',
+        'footer.nvidia.role': 'Accelerated Computing',
+        'footer.big4.title': 'Global Big 4',
+        'footer.big4.role': 'Audit Compatible',
         'footer.tagline': 'Manutenção Autônoma AI-Native',
+        'footer.rights': 'Todos os direitos reservados.',
 
         // Login
         'login.welcome': 'Bem-vindo de volta',
@@ -121,12 +165,11 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.login': 'Sign In',
 
         // Hero
-        'hero.badge': 'AI-Native Platform for Industrial Maintenance',
-        'hero.title1': 'Cognitive Evolution',
-        'hero.title2': 'for Industrial',
-        'hero.title3': 'Maintenance',
-        'hero.subtitle': 'We transform raw industrial sensor data into autonomous decisions. Our AI doesn\'t just predict failures — it understands operational context and acts in real-time.',
-        'hero.cta.demo': 'Schedule Demo',
+        'hero.badge': 'Neural Edge Industrial',
+        'hero.title.part1': 'Digitalization was Just the Beginning.',
+        'hero.title.part2': 'Welcome to Industrial Cognition.',
+        'hero.subtitle': 'The first AI-Native platform that merges Engineering, Telemetry, and Contract Intelligence. Leave passive dashboards behind and enter the era of autonomous decision-making.',
+        'hero.cta.demo': 'Request Access (Demo)',
         'hero.cta.video': 'See AI Native Cognitive Tech',
 
         // Stats
@@ -136,10 +179,23 @@ const translations: Record<Language, Record<string, string>> = {
         'stats.uptime': 'Average Uptime',
 
         // Features
-        'features.badge': 'UNIQUE NEURAL ARCHITECTURE',
-        'features.title': 'Industrial Cognition,',
-        'features.title2': 'Not Just Prediction',
-        'features.subtitle': 'While others predict failures, we autonomously prevent them.',
+        'features.badge': 'Technical Differentiators',
+        'features.title': 'Cutting-Edge Technology for',
+        'features.title.highlight': 'Autonomous Decisions',
+        'features.subtitle': 'Our stack combines advanced physics, signal processing, and automated compliance.',
+
+        // Bento Grid Items
+        'feature.validation.category': 'Validation',
+        'feature.validation.title': 'Physical Maintenance Validation',
+        'feature.validation.desc': 'The technician said it was done, but does the machine agree? We cross-reference human input with telemetry to ensure maintenance was effective, not just bureaucratic.',
+
+        'feature.audit.category': 'Audit',
+        'feature.audit.title': 'Cross-Audit (Cognitive Data)',
+        'feature.audit.desc': 'Our agents read your contracts and compare them with SAP entries in real-time. We find financial inconsistencies that humans would miss.',
+
+        'feature.legal.category': 'Legal',
+        'feature.legal.title': 'Native Compliance',
+        'feature.legal.desc': 'Automatic cross-referencing of technical failures with contractual SLAs and supplier warranties.',
 
         'feature.neural.title': 'Neural Edge Computing',
         'feature.neural.desc': 'AI processing directly on the factory floor. Latency < 10ms for critical decisions. Works offline.',
@@ -153,19 +209,51 @@ const translations: Record<Language, Record<string, string>> = {
         // Live Insights
         'insights.badge': 'LIVE SYSTEM',
         'insights.title': 'Real-Time Cognition on',
-        'insights.title2': 'SAP Data',
-        'insights.subtitle': 'See how we evolve the intelligence of what\'s already digitized. Each insight is automatically generated by telemetry + ERP fusion.',
+        'insights.title.highlight': 'SAP Data',
+        'insights.subtitle': 'See how we evolve the intelligence of what\'s already digitized. Each insight is generated automatically by telemetry + ERP fusion.',
+        'insights.terminal.header': 'xma.ia neural-edge-v2.4.1 — Live Feed',
         'insights.connected': 'Connected to SAP',
         'insights.processing': 'Processing next insight...',
+
+        // Insights Data Items
+        'insight.stock.title': '⚠️ Critical Stock - bearing SKF 6205',
+        'insight.stock.desc': 'Only 2 units in stock. Avg consumption SAP: 4 units/mo. Supplier lead time: 18 days. Rupture risk in 15 days if not purchased now.',
+        'insight.stock.value': 'Suggested order: 12 units',
+
+        'insight.vendor.title': '📊 Supplier Comparison',
+        'insight.vendor.desc': 'Auto analysis: "Rolamentos Brasil" delivers 23% faster than "MecParts". Cost 8% higher, but saves 12 days lead time. 98% on-time delivery history.',
+        'insight.vendor.value': 'Potential savings in downtime: $45,000/mo',
+
+        'insight.demand.title': '📦 Seasonal Consumption Forecast',
+        'insight.demand.desc': 'Based on history + scheduled December shutdowns: Conveyor belts will zero out in 21 days. 67% demand increase expected.',
+        'insight.demand.value': 'Suggested order: 45 belts A-68',
+
+        'insight.conflict.title': '🔧 Allocation Conflict Detected',
+        'insight.conflict.desc': '3 maintenance orders scheduled for 2pm in Boilers sector. Technician Carlos already allocated to 2 simultaneous WOs. Available resource: Technician Ricardo (free at 3pm).',
+        'insight.conflict.value': 'Click to auto-rebalance',
+
+        'insight.backlog.title': '📈 Growing Backlog - Attention!',
+        'insight.backlog.desc': 'Maintenance backlog grew 34% this month. 47 delayed orders. Identified causes: Lack of parts (67%), Insufficient labor (23%), Incorrect prioritization (10%).',
+        'insight.backlog.value': 'Impact: $180,000 downtime risk',
+
+        'insight.prevented.title': '✅ Model Correct - Failure Prevented',
+        'insight.prevented.desc': 'Compressor C-03: failure predicted 12 days ago confirmed in preventive inspection. Seal replacement performed. 16h unscheduled downtime avoided.',
+        'insight.prevented.value': 'Confirmed savings: $288,000',
+
+        // Stats
         'insights.stats.orders': 'SAP Orders Analyzed',
-        'insights.stats.predictions': 'Failures Predicted',
-        'insights.stats.accuracy': 'accuracy',
+        'insights.stats.predictions': 'Predictive Accuracy',
         'insights.stats.savings': 'Generated Savings',
-        'insights.stats.period': 'last 30 days',
-        'insights.stats.today': 'today',
+        'insights.stats.trend.orders': '+342 today',
+        'insights.stats.trend.accuracy': 'accuracy',
+        'insights.stats.trend.savings': 'last 30 days',
 
         // Footer
         'footer.partners': 'Technology & Partners',
+        'footer.mendix.role': 'Siemens ISV Partner',
+        'footer.nvidia.role': 'Accelerated Computing',
+        'footer.big4.title': 'Global Big 4',
+        'footer.big4.role': 'Audit Compatible',
         'footer.rights': 'All rights reserved.',
         'footer.tagline': 'AI-Native Autonomous Maintenance',
 

@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Tag, Progress } from 'antd';
 import {
-    ThunderboltOutlined,
     AlertOutlined,
     CheckCircleOutlined,
     ClockCircleOutlined,
@@ -11,6 +10,7 @@ import {
     SyncOutlined,
     SafetyCertificateOutlined,
 } from '@ant-design/icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const { Title, Text } = Typography;
 
@@ -25,132 +25,86 @@ interface Insight {
     timestamp: string;
 }
 
-const insightsData: Insight[] = [
-    // === ESTOQUE E PEÇAS ===
-    {
-        id: 1,
-        type: 'critical',
-        icon: <AlertOutlined />,
-        sapRef: 'SAP MM | Material 10045892',
-        title: '⚠️ Estoque Crítico - Rolamento SKF 6205',
-        description: 'Apenas 2 unidades em estoque. Consumo médio SAP: 4 un/mês. Lead time do fornecedor: 18 dias. Risco de ruptura em 15 dias se não comprar agora.',
-        value: 'Pedido sugerido: 12 unidades',
-        timestamp: 'Agora',
-    },
-    {
-        id: 2,
-        type: 'info',
-        icon: <DollarOutlined />,
-        sapRef: 'SAP MM | Fornecedor 50001',
-        title: '📊 Comparativo de Fornecedores',
-        description: 'Análise automática: "Rolamentos Brasil" entrega 23% mais rápido que "MecParts". Custo 8% maior, mas economia de 12 dias em lead time. Histórico de 98% de entregas no prazo.',
-        value: 'Economia potencial em paradas: R$ 45.000/mês',
-        timestamp: '2 min atrás',
-    },
-    {
-        id: 3,
-        type: 'warning',
-        icon: <ClockCircleOutlined />,
-        sapRef: 'SAP MM | Requisição 4500123',
-        title: '📦 Previsão de Consumo Sazonal',
-        description: 'Baseado em histórico + paradas programadas de dezembro: Correias transportadoras vão zerar em 21 dias. Aumento de 67% na demanda esperado.',
-        value: 'Pedido sugerido: 45 correias A-68',
-        timestamp: '5 min atrás',
-    },
-
-    // === PLANEJAMENTO DE MANUTENÇÃO ===
-    {
-        id: 4,
-        type: 'critical',
-        icon: <AlertOutlined />,
-        sapRef: 'SAP PM | Ordens Conflitantes',
-        title: '🔧 Conflito de Alocação Detectado',
-        description: '3 ordens de manutenção agendadas para 14h no setor Caldeiras. Técnico Carlos já alocado em 2 OS simultâneas. Recurso disponível: Técnico Ricardo (livre às 15h).',
-        value: 'Clique para rebalancear automaticamente',
-        timestamp: '8 min atrás',
-    },
-    {
-        id: 5,
-        type: 'warning',
-        icon: <SafetyCertificateOutlined />,
-        sapRef: 'SAP PM | Backlog Analysis',
-        title: '📈 Backlog Crescente - Atenção!',
-        description: 'Backlog de manutenção cresceu 34% este mês. 47 ordens atrasadas. Causas identificadas: Falta de peças (67%), Mão de obra insuficiente (23%), Priorização incorreta (10%).',
-        value: 'Impacto: R$ 180.000 em risco de parada',
-        timestamp: '15 min atrás',
-    },
-    {
-        id: 6,
-        type: 'success',
-        icon: <CheckCircleOutlined />,
-        sapRef: 'SAP PM | Predição Confirmada',
-        title: '✅ Modelo Acertou - Falha Evitada',
-        description: 'Compressor C-03: falha prevista há 12 dias foi confirmada na inspeção preventiva. Substituição do selo realizada. Parada não-programada de 16h evitada.',
-        value: 'Economia confirmada: R$ 288.000',
-        timestamp: '1h atrás',
-    },
-
-    // === CADEIA DE SUPRIMENTOS ===
-    {
-        id: 7,
-        type: 'warning',
-        icon: <ClockCircleOutlined />,
-        sapRef: 'SAP MM | Import 2024-1892',
-        title: '🚛 Gargalo na Cadeia - Peça Importada',
-        description: 'Selo Mecânico Burgmann com lead time de 45 dias (Alemanha). 3 bombas dependem dessa peça. Alternativa nacional identificada: "Vedamais" (7 dias, custo +15%).',
-        value: 'Decisão necessária: importar ou nacionalizar?',
-        timestamp: '2h atrás',
-    },
-    {
-        id: 8,
-        type: 'info',
-        icon: <SyncOutlined />,
-        sapRef: 'SAP PM | Correlação Descoberta',
-        title: '🔗 Correlação que SAP Não Vê',
-        description: 'Padrão descoberto: Quando Bomba P-201 apresenta vibração alta, o Trocador T-05 falha em até 72h (89% dos casos). SAP trata como eventos independentes.',
-        value: 'Sugestão: criar plano de manutenção integrado',
-        timestamp: '3h atrás',
-    },
-
-    // === GARANTIAS E CONTRATOS ===
-    {
-        id: 9,
-        type: 'critical',
-        icon: <AlertOutlined />,
-        sapRef: 'SAP QM | Garantia WEG-2024',
-        title: '⏰ Garantia Expirando em 6 Dias!',
-        description: 'Motor WEG W22 (R$ 47.000) com garantia até 28/12. SAP registra 3 anomalias de vibração não reportadas ao fabricante. Se não abrir chamado, perde cobertura.',
-        value: 'Perda potencial: R$ 47.000 + mão de obra',
-        timestamp: '4h atrás',
-    },
-    {
-        id: 10,
-        type: 'warning',
-        icon: <SafetyCertificateOutlined />,
-        sapRef: 'SAP CO | Contrato CLI-2024-AMBEV',
-        title: '📋 SLA em Risco - Cliente AMBEV',
-        description: 'Contrato exige 98% de disponibilidade. Atual: 96.2%. Principais vilões: Linha 3 (4 paradas) e Caldeira 2 (3 paradas). Multa contratual se não reverter: R$ 320.000.',
-        value: 'Ver plano de ação sugerido pela IA',
-        timestamp: '5h atrás',
-    },
-];
-
 const LiveInsights: React.FC = () => {
-    const [visibleInsights, setVisibleInsights] = useState<Insight[]>([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const { t } = useLanguage();
+    const [visibleCount, setVisibleCount] = useState(0);
+
+    const insightsData: Insight[] = [
+        // === ESTOQUE E PEÇAS ===
+        {
+            id: 1,
+            type: 'critical',
+            icon: <AlertOutlined />,
+            sapRef: 'SAP MM | Material 10045892',
+            title: t('insight.stock.title'),
+            description: t('insight.stock.desc'),
+            value: t('insight.stock.value'),
+            timestamp: 'Agora',
+        },
+        {
+            id: 2,
+            type: 'info',
+            icon: <DollarOutlined />,
+            sapRef: 'SAP MM | Fornecedor 50001',
+            title: t('insight.vendor.title'),
+            description: t('insight.vendor.desc'),
+            value: t('insight.vendor.value'),
+            timestamp: '2 min atrás',
+        },
+        {
+            id: 3,
+            type: 'warning',
+            icon: <ClockCircleOutlined />,
+            sapRef: 'SAP MM | Requisição 4500123',
+            title: t('insight.demand.title'),
+            description: t('insight.demand.desc'),
+            value: t('insight.demand.value'),
+            timestamp: '5 min atrás',
+        },
+
+        // === PLANEJAMENTO DE MANUTENÇÃO ===
+        {
+            id: 4,
+            type: 'critical',
+            icon: <AlertOutlined />,
+            sapRef: 'SAP PM | Ordens Conflitantes',
+            title: t('insight.conflict.title'),
+            description: t('insight.conflict.desc'),
+            value: t('insight.conflict.value'),
+            timestamp: '8 min atrás',
+        },
+        {
+            id: 5,
+            type: 'warning',
+            icon: <SafetyCertificateOutlined />,
+            sapRef: 'SAP PM | Backlog Analysis',
+            title: t('insight.backlog.title'),
+            description: t('insight.backlog.desc'),
+            value: t('insight.backlog.value'),
+            timestamp: '15 min atrás',
+        },
+        {
+            id: 6,
+            type: 'success',
+            icon: <CheckCircleOutlined />,
+            sapRef: 'SAP PM | Predição Confirmada',
+            title: t('insight.prevented.title'),
+            description: t('insight.prevented.desc'),
+            value: t('insight.prevented.value'),
+            timestamp: '1h atrás',
+        },
+    ];
 
     useEffect(() => {
         // Mostrar primeiro insight imediatamente
-        if (insightsData.length > 0 && visibleInsights.length === 0) {
-            setVisibleInsights([insightsData[0]]);
-            setCurrentIndex(1);
+        if (visibleCount === 0) {
+            setVisibleCount(1);
         }
 
         // Adicionar novos insights progressivamente
         const interval = setInterval(() => {
-            setCurrentIndex((prev) => {
+            setVisibleCount((prev) => {
                 if (prev < insightsData.length) {
-                    setVisibleInsights((current) => [...current, insightsData[prev]]);
                     return prev + 1;
                 }
                 return prev;
@@ -172,6 +126,8 @@ const LiveInsights: React.FC = () => {
                 return { bg: 'rgba(0, 102, 255, 0.15)', border: 'rgba(0, 102, 255, 0.4)', text: '#0066ff', tag: 'blue' };
         }
     };
+
+    const visibleInsights = insightsData.slice(0, visibleCount);
 
     return (
         <section
@@ -225,7 +181,7 @@ const LiveInsights: React.FC = () => {
                             }}
                         />
                         <span style={{ color: '#00ff88', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
-                            SISTEMA VIVO
+                            {t('insights.badge')}
                         </span>
                     </div>
 
@@ -239,13 +195,12 @@ const LiveInsights: React.FC = () => {
                             marginTop: 0,
                         }}
                     >
-                        Cognição em Tempo Real sobre{' '}
-                        <span style={{ color: '#00d4ff' }}>Dados SAP</span>
+                        {t('insights.title')}{' '}
+                        <span style={{ color: '#00d4ff' }}>{t('insights.title.highlight')}</span>
                     </Title>
 
                     <Text style={{ fontSize: '17px', color: 'rgba(255, 255, 255, 0.6)', display: 'block', maxWidth: '600px', margin: '0 auto' }}>
-                        Veja como evoluímos a inteligência do que já está digitalizado.
-                        Cada insight é gerado automaticamente pela fusão de telemetria + ERP.
+                        {t('insights.subtitle')}
                     </Text>
                 </div>
 
@@ -275,12 +230,12 @@ const LiveInsights: React.FC = () => {
                         <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
                         <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27ca41' }} />
                         <Text style={{ marginLeft: '12px', color: 'rgba(255, 255, 255, 0.5)', fontSize: '13px', fontFamily: 'monospace' }}>
-                            xma.ia neural-edge-v2.4.1 — Live Feed
+                            {t('insights.terminal.header')}
                         </Text>
                         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <SyncOutlined spin style={{ color: '#00ff88', fontSize: '14px' }} />
                             <Text style={{ color: '#00ff88', fontSize: '12px', fontFamily: 'monospace' }}>
-                                Conectado ao SAP
+                                {t('insights.connected')}
                             </Text>
                         </div>
                     </div>
@@ -351,7 +306,7 @@ const LiveInsights: React.FC = () => {
                         })}
 
                         {/* Loading indicator */}
-                        {currentIndex < insightsData.length && (
+                        {visibleCount < insightsData.length && (
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px' }}>
                                 <Progress
                                     type="circle"
@@ -363,7 +318,7 @@ const LiveInsights: React.FC = () => {
                                     style={{ animation: 'spin 1s linear infinite' }}
                                 />
                                 <Text style={{ color: 'rgba(255, 255, 255, 0.4)', fontSize: '13px', fontFamily: 'monospace' }}>
-                                    Processando próximo insight...
+                                    {t('insights.processing')}
                                 </Text>
                             </div>
                         )}
@@ -380,9 +335,9 @@ const LiveInsights: React.FC = () => {
                     }}
                 >
                     {[
-                        { label: 'Ordens SAP Analisadas', value: '12.847', trend: '+342 hoje' },
-                        { label: 'Falhas Previstas', value: '94.7%', trend: 'acurácia' },
-                        { label: 'Economia Gerada', value: 'R$ 4.2M', trend: 'últimos 30 dias' },
+                        { label: t('insights.stats.orders'), value: '12.847', trend: t('insights.stats.trend.orders') },
+                        { label: t('insights.stats.predictions'), value: '94.7%', trend: t('insights.stats.trend.accuracy') },
+                        { label: t('insights.stats.savings'), value: 'R$ 4.2M', trend: t('insights.stats.trend.savings') },
                     ].map((stat, index) => (
                         <div
                             key={index}

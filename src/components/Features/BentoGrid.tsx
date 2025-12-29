@@ -7,6 +7,7 @@ import {
     FilterOutlined,
     SafetyCertificateOutlined
 } from '@ant-design/icons';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const { Title, Paragraph } = Typography;
 
@@ -101,24 +102,26 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 );
 
 const BentoGrid: React.FC = () => {
+    const { t } = useLanguage();
+
     const features = [
         {
             icon: <ThunderboltOutlined />,
-            category: 'Validação',
-            title: 'Validação Física da Manutenção',
-            description: 'O técnico disse que fez, mas a máquina concorda? Cruzamos o input humano com a telemetria para garantir que a manutenção foi eficaz, não apenas burocrática.',
+            category: t('feature.validation.category'),
+            title: t('feature.validation.title'),
+            description: t('feature.validation.desc'),
         },
         {
             icon: <FilterOutlined />,
-            category: 'Auditoria',
-            title: 'Auditoria Cruzada (Cognitive Data)',
-            description: 'Os nossos agentes leem os seus contratos e comparam com os lançamentos no SAP em tempo real. Encontramos inconsistências financeiras que humanos deixariam passar.',
+            category: t('feature.audit.category'),
+            title: t('feature.audit.title'),
+            description: t('feature.audit.desc'),
         },
         {
             icon: <SafetyCertificateOutlined />,
-            category: 'Legal',
-            title: 'Compliance Nativo',
-            description: 'Cruzamento automático de falhas técnicas com SLAs contratuais e garantias de fornecedores.',
+            category: t('feature.legal.category'),
+            title: t('feature.legal.title'),
+            description: t('feature.legal.desc'),
         },
     ];
 
@@ -157,7 +160,7 @@ const BentoGrid: React.FC = () => {
                         animationFillMode: 'forwards',
                     }}
                 >
-                    Diferenciais Técnicos
+                    {t('features.badge')}
                 </span>
 
                 <Title
@@ -174,8 +177,8 @@ const BentoGrid: React.FC = () => {
                         animationFillMode: 'forwards',
                     }}
                 >
-                    Tecnologia de Ponta para{' '}
-                    <span style={{ color: '#00d4ff' }}>Decisões Autônomas</span>
+                    {t('features.title')}{' '}
+                    <span style={{ color: '#00d4ff' }}>{t('features.title.highlight')}</span>
                 </Title>
 
                 <Paragraph
@@ -189,7 +192,7 @@ const BentoGrid: React.FC = () => {
                         animationFillMode: 'forwards',
                     }}
                 >
-                    Nossa stack combina física avançada, processamento de sinais e compliance automatizado.
+                    {t('features.subtitle')}
                 </Paragraph>
             </div>
 
