@@ -297,7 +297,7 @@ graph TD
 | **Google Ads** | ❌ Não configurado |
 | **Google Tag Manager** | ❌ Não configurado |
 | **Facebook Pixel** | ❌ Não configurado |
-| **SEO/Sitemap** | ⚠️ Metadata OK, mas sem `sitemap.xml` ou `robots.txt` |
+| **SEO/Sitemap** | ✅ Completo (`src/app/sitemap.ts` e `src/app/robots.ts` no App Router) |
 
 ### SEO Configurado (em `layout.tsx`)
 
@@ -327,32 +327,35 @@ metadata = {
 
 | Aspecto | Status | Detalhes |
 |:--------|:-------|:---------|
-| **Testes Automatizados** | ❌ | Nenhum teste unitário/e2e |
-| **Linting** | ⚠️ Parcial | Script `next lint` existe mas sem `.eslintrc` |
-| **CI/CD** | ❌ | Sem GitHub Actions |
+| **Testes Automatizados** | ✅ Ativo | Suíte unitária `tests/i18n.test.ts` via `npm test` (node:test + tsx) |
+| **Linting** | ✅ Ativo | ESLint 9 Flat Config (`eslint.config.mjs`) com parser TypeScript |
+| **CI/CD** | ✅ Ativo | GitHub Actions (`.github/workflows/ci.yml`) com Gitleaks e Quality Gate |
+| **Auto-Healing de CI** | ✅ Ativo | Abertura automática de Issues estruturadas + diagnóstico `npm run ci:diagnose` |
 | **Monitoramento** | ⚠️ | Vercel Observability ativo (Edge Requests, Error Rate) |
 | **Firewall** | ✅ | Vercel Firewall ativa — All systems normal |
 | **Backup** | ⚠️ | Apenas via Git (código). Sem dados para backup |
 
-### Fluxo de Trabalho
+### Fluxo de Trabalho (ISO 42001 & ISO 27001)
 
 ```mermaid
 graph LR
-    A[Editar Código Local] --> B[Testar: npm run dev]
-    B --> C[git add + commit]
-    C --> D[git push origin main]
-    D --> E[Vercel Auto-Deploy]
-    E --> F[Verificar www.xma-ia.com]
+    A[Editar Código em Branch] --> B[Testar: npm test + typecheck]
+    B --> C[Abrir PR no GitHub]
+    C --> D[CI GitHub Actions + Vercel Preview]
+    D --> E[Squash & Merge na main]
+    E --> F[Vercel Deploy www.xma-ia.com]
 ```
 
 ### Comandos Essenciais
 
 ```bash
 npm run dev          # Servidor dev em localhost:3000
-npm run build        # Build otimizado
+npm run typecheck    # Verificação estática de tipos
+npm run lint         # Análise de conformidade de código
+npm test             # Execução de testes unitários automatizados
+npm run ci:diagnose  # Diagnóstico e ingestão de incidentes de CI
+npm run build        # Build otimizado de produção
 npm start            # Serve o build local
-npm run lint         # Verifica código
-git push origin main # Deploy automático Vercel
 ```
 
 ---
@@ -532,18 +535,19 @@ import Image from 'next/image';
 
 ## 13. ⚠️ PROBLEMAS CONHECIDOS
 
-| # | Problema | Severidade | Ação |
-|:-:|:---------|:-----------|:-----|
-| 1 | Login apenas visual | 🟡 | Implementar backend |
-| 2 | Sem .env configurado | 🟡 | Criar quando necessário |
-| 3 | Dados hardcoded/demo | 🟡 | Conectar API real |
-| 4 | Sem testes | 🔴 | Adicionar Jest + Testing Library |
-| 5 | Sem sitemap.xml/robots.txt | 🟡 | Criar para SEO |
+| # | Problema | Severidade | Ação / Status |
+|:-:|:---------|:-----------|:--------------|
+| 1 | Login apenas visual | 🟡 | Implementar backend quando requerido |
+| 2 | Sem .env configurado | 🟡 | Criar quando necessário (Vercel Environment Variables) |
+| 3 | Dados hardcoded/demo | 🟡 | Conectar API real quando disponível |
+| 4 | Sem testes | 🟢 | ✅ **Resolvido (Sprint 3):** Suíte unitária em `tests/i18n.test.ts` via `npm test` |
+| 5 | Sem sitemap.xml/robots.txt | 🟢 | ✅ **Resolvido (Sprint 3):** `sitemap.ts` e `robots.ts` nativos no App Router |
 | 6 | Sem analytics ativo | 🟡 | Habilitar Vercel Analytics ou GA4 |
-| 7 | Arquivos não commitados | 🔴 | Commitar Dockerfile e AccessRequest |
-| 8 | Dockerfile em dev mode | 🟡 | Alterar para build + start |
-| 9 | Sem error boundaries | 🟡 | Adicionar error.tsx |
-| 10 | 3 recomendações Vercel pendentes | 🟡 | Verificar Deployment Settings |
+| 7 | Arquivos não commitados | 🟢 | ✅ **Resolvido (Sprint 0):** `Dockerfile` e `AccessRequestModal.tsx` comitados |
+| 8 | Sem CI/CD e Governança | 🟢 | ✅ **Resolvido (Sprints 1 e 2):** GitHub Actions CI + Branch Protection Rules |
+| 9 | Gestão de Falhas no CI | 🟢 | ✅ **Resolvido (Sprint 4):** Auto-incident reporting + `npm run ci:diagnose` |
+| 10 | Dockerfile em dev mode | 🟡 | Alterar para build + start em produção |
+| 11 | Sem error boundaries | 🟡 | Adicionar error.tsx |
 
 ---
 
