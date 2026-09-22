@@ -26,6 +26,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Graphify local graph (regeneravel; o CI rejeita graphify-out em PRs)
+graphify-out/
+
 # IDE
 .idea/
 .vscode/

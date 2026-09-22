@@ -513,6 +513,25 @@ const CognitiveDashboard: React.FC<CognitiveDashboardProps> = ({ isOpen, onClose
                     </div>
                 </div>
             </div>
+
+            {/* CSS Animations */}
+            <style jsx global>{`
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                
+                @keyframes scaleIn {
+                    from {
+                        opacity: 0;
+                        transform: translate(-50%, -50%) scale(0.9);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translate(-50%, -50%) scale(1);
+                    }
+                }
+            `}</style>
         </>
     );
 
@@ -576,25 +595,6 @@ const CognitiveDashboard: React.FC<CognitiveDashboardProps> = ({ isOpen, onClose
             >
                 {dashboardContent}
             </div>
-
-            {/* CSS Animations */}
-            <style jsx global>{`
-                @keyframes fadeIn {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                }
-                
-                @keyframes scaleIn {
-                    from {
-                        opacity: 0;
-                        transform: translate(-50%, -50%) scale(0.9);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translate(-50%, -50%) scale(1);
-                    }
-                }
-            `}</style>
         </>
     );
 };
