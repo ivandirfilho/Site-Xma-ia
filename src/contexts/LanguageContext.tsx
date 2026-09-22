@@ -10,7 +10,7 @@ interface LanguageContextType {
     t: (key: string) => string;
 }
 
-const translations: Record<Language, Record<string, string>> = {
+export const translations: Record<Language, Record<string, string>> = {
     'pt-BR': {
         // Header
         'nav.technology': 'Tecnologia',

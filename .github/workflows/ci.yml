@@ -47,5 +47,8 @@ jobs:
       - name: TypeScript Strict Type Check
         run: npm run typecheck
 
+      - name: Run Automated Unit Tests (ISO 25010)
+        run: npm test
+
       - name: Next.js Production Build
         run: npm run build
