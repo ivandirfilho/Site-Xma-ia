@@ -47,6 +47,9 @@ npm run lint
 # Execução da suíte de testes unitários automatizados (obrigatório 100% de aprovação)
 npm test
 
+# Diagnóstico e ingestão de incidentes/falhas do GitHub Actions (Self-Healing)
+npm run ci:diagnose
+
 # Build de produção otimizado (validação de bundling, rotas estáticas e SSR)
 npm run build
 
@@ -116,6 +119,11 @@ flowchart LR
 * Pushes diretos e force-pushes na branch `main` estão bloqueados.
 * Exige que os status checks `Quality Assurance & Build (ISO 25010)` e `Secret Scanning & Security (ISO 27001)` passem antes de qualquer liberação de merge.
 
+### D. Gestão de Incidentes & Auto-Healing de CI (ISO 27001 A.16 / ISO 42001)
+* Se qualquer verificação de qualidade falhar no GitHub Actions, o pipeline cria automaticamente uma Issue estruturada com as labels `ci-failure` e `bug`.
+* O agente ou engenheiro executa `npm run ci:diagnose` para analisar instantaneamente a causa raiz com extrato dos logs e metadados da execução.
+* A correção é aplicada em branch de auto-healing, validada via `npm test` e submetida via PR, fechando a issue associada com a label `auto-healed`.
+
 ---
 
 ## 6. Protocolo de Governança para Agentes (ISO 42001 & ISO 5338)
@@ -165,3 +173,8 @@ Quando um agente de IA estiver executando tarefas neste repositório, ele deve s
   - Implementação da suíte de testes unitários ultrarrápida com `tsx` e `node:test` ([tests/i18n.test.ts](file:///c:/Users/Windows/Desktop/Site%20Xmaia/Site-Xma-ia/tests/i18n.test.ts)).
   - Integração do step `npm test` no workflow de CI.
   - Abertura, validação e merge do Pull Request #2.
+* **Sprint 4 — Gestão de Incidentes de CI & Auto-Healing (Full AI Lifecycle):**
+  - Criação das labels de governança `ci-failure` e `auto-healed`.
+  - Configuração de auto-report de falhas do GitHub Actions como issues estruturadas (`if: failure()`).
+  - Implementação do script de triagem e diagnóstico local `npm run ci:diagnose` ([scripts/ci-diagnose.mjs](file:///c:/Users/Windows/Desktop/Site%20Xmaia/Site-Xma-ia/scripts/ci-diagnose.mjs)).
+  - Abertura, validação e merge do Pull Request #4.

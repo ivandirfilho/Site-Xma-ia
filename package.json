@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "eslint src",
         "typecheck": "tsc --noEmit",
-        "test": "tsx --test tests/i18n.test.ts"
+        "test": "tsx --test tests/i18n.test.ts",
+        "ci:diagnose": "node scripts/ci-diagnose.mjs"
     },
     "dependencies": {
         "@ant-design/cssinjs": "^1.18.1",

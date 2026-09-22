@@ -10,6 +10,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   security-scan:
     name: Secret Scanning & Security (ISO 27001)
@@ -52,3 +56,33 @@ jobs:
 
       - name: Next.js Production Build
         run: npm run build
+
+      - name: Report Failure as Incident Issue (ISO 27001 / ISO 42001)
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "🚨 [CI Failure] Falha na branch ${{ github.ref_name }} (Run #${{ github.run_number }})" \
+            --body "### 🚨 Incidente de CI Detectado (ISO/IEC 27001 & ISO/IEC 42001)
+          - **Branch:** \`${{ github.ref_name }}\`
+          - **Commit:** \`${{ github.sha }}\`
+          - **Execução:** [Run #${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          - **Workflow:** \`${{ github.workflow }}\`
+
+          #### 🛠️ Instruções para Auto-Healing (Agente IA / Engenharia):
+          1. Execute localmente para inspecionar os logs exatos:
+             \`\`\`bash
+             npm run ci:diagnose
+             # ou diretamente:
+             gh run view ${{ github.run_id }} --log-failed
+             \`\`\`
+          2. Reproduza e valide as correções:
+             \`\`\`bash
+             npm run typecheck
+             npm run lint
+             npm test
+             npm run build
+             \`\`\`
+          3. Suba o commit corretivo na branch \`${{ github.ref_name }}\` e feche esta issue com a label \`auto-healed\`." \
+            --label "ci-failure,bug"
